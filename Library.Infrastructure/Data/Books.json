@@ -1,0 +1,122 @@
+[
+  {
+    "BookID": 1,
+    "Title": "C++ in Arabic",
+    "Author": "John Doe",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 2,
+    "Title": "Introduction to Algorithms",
+    "Author": "Thomas H. Cormen",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-07-10T00:00:00",
+    "BorrowedBy": 3
+  },
+  {
+    "BookID": 3,
+    "Title": "Clean Code",
+    "Author": "Robert C. Martin",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 4,
+    "Title": "The Pragmatic Programmer",
+    "Author": "Andrew Hunt",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-06-25T00:00:00",
+    "BorrowedBy": 2
+  },
+  {
+    "BookID": 5,
+    "Title": "Effective Java",
+    "Author": "Joshua Bloch",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 6,
+    "Title": "Design Patterns",
+    "Author": "Erich Gamma",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 7,
+    "Title": "Refactoring",
+    "Author": "Martin Fowler",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-01T00:00:00",
+    "BorrowedBy": 1
+  },
+  {
+    "BookID": 8,
+    "Title": "The Mythical Man-Month",
+    "Author": "Frederick P. Brooks Jr.",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 9,
+    "Title": "Code Complete",
+    "Author": "Steve McConnell",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-07-20T00:00:00",
+    "BorrowedBy": 5
+  },
+  {
+    "BookID": 10,
+    "Title": "You Don't Know JS",
+    "Author": "Kyle Simpson",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 11,
+    "Title": "The Art of Computer Programming",
+    "Author": "Donald E. Knuth",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 12,
+    "Title": "JavaScript: The Good Parts",
+    "Author": "Douglas Crockford",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-05T00:00:00",
+    "BorrowedBy": 4
+  },
+  {
+    "BookID": 13,
+    "Title": "Eloquent JavaScript",
+    "Author": "Marijn Haverbeke",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 14,
+    "Title": "Understanding Machine Learning",
+    "Author": "Shai Shalev-Shwartz",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null
+  },
+  {
+    "BookID": 15,
+    "Title": "Artificial Intelligence: A Modern Approach",
+    "Author": "Stuart Russell",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-07T00:00:00",
+    "BorrowedBy": 6
+  }
+]
