@@ -1,0 +1,118 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|c:\\users\\ntc\\source\\repos\\library-management-system\\library.consoleapp\\screens\\membersscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|solutionrelative:library.consoleapp\\screens\\membersscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0D59A96-6AFC-4781-AB70-BD7F00E81C32}|Library.Infrastructure\\Library.Infrastructure.csproj|C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\library.infrastructure\\data\\members.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D0D59A96-6AFC-4781-AB70-BD7F00E81C32}|Library.Infrastructure\\Library.Infrastructure.csproj|solutionrelative:library.infrastructure\\data\\members.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{23CDC0C9-566E-4C7A-94CE-C01DAB1A9E29}|Library.Application\\Library.Application.csproj|C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\library.application\\library.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{23CDC0C9-566E-4C7A-94CE-C01DAB1A9E29}|Library.Application\\Library.Application.csproj|solutionrelative:library.application\\library.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D0D59A96-6AFC-4781-AB70-BD7F00E81C32}|Library.Infrastructure\\Library.Infrastructure.csproj|C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\library.infrastructure\\filemodule\\memberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D0D59A96-6AFC-4781-AB70-BD7F00E81C32}|Library.Infrastructure\\Library.Infrastructure.csproj|solutionrelative:library.infrastructure\\filemodule\\memberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\library.consoleapp\\consolecontrol\\ansi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|solutionrelative:library.consoleapp\\consolecontrol\\ansi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\library.consoleapp\\consolecontrol\\output.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27F5B878-ACDA-41BC-B5D2-3B13E0AAD3A7}|Library.ConsoleApp\\Library.ConsoleApp.csproj|solutionrelative:library.consoleapp\\consolecontrol\\output.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MembersScreen.cs",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\Screens\\MembersScreen.cs",
+              "RelativeDocumentMoniker": "Library.ConsoleApp\\Screens\\MembersScreen.cs",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\Screens\\MembersScreen.cs",
+              "RelativeToolTip": "Library.ConsoleApp\\Screens\\MembersScreen.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAADEAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T11:08:47.303Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Members.json",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Infrastructure\\Data\\Members.json",
+              "RelativeDocumentMoniker": "Library.Infrastructure\\Data\\Members.json",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Infrastructure\\Data\\Members.json",
+              "RelativeToolTip": "Library.Infrastructure\\Data\\Members.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-08-10T15:58:39.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Ansi.cs",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\ConsoleControl\\Ansi.cs",
+              "RelativeDocumentMoniker": "Library.ConsoleApp\\ConsoleControl\\Ansi.cs",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\ConsoleControl\\Ansi.cs",
+              "RelativeToolTip": "Library.ConsoleApp\\ConsoleControl\\Ansi.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAYwCUAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-10T15:51:13.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MemberRepository.cs",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Infrastructure\\FileModule\\MemberRepository.cs",
+              "RelativeDocumentMoniker": "Library.Infrastructure\\FileModule\\MemberRepository.cs",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Infrastructure\\FileModule\\MemberRepository.cs",
+              "RelativeToolTip": "Library.Infrastructure\\FileModule\\MemberRepository.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAUwCUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-10T10:44:20.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Library.cs",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Application\\Library.cs",
+              "RelativeDocumentMoniker": "Library.Application\\Library.cs",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Application\\Library.cs",
+              "RelativeToolTip": "Library.Application\\Library.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAtwDMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T17:05:15.194Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "output.cs",
+              "DocumentMoniker": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\ConsoleControl\\output.cs",
+              "RelativeDocumentMoniker": "Library.ConsoleApp\\ConsoleControl\\output.cs",
+              "ToolTip": "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.ConsoleApp\\ConsoleControl\\output.cs",
+              "RelativeToolTip": "Library.ConsoleApp\\ConsoleControl\\output.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBQAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-09T14:23:55.955Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

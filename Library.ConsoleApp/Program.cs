@@ -12,12 +12,13 @@ namespace ConsoleApp
 {
 	public class Program
 	{
-		public static async Task Main(string[] args)
+		public static int Main(string[] args)
 		{
 			var host = CreateHostBuilder(args).Build();
 			var library = host.Services.GetRequiredService<Application.Library>();
 
 			MainScreen.MainScreenMenu(library);
+			return 0;
 		}
 
 		private static IHostBuilder CreateHostBuilder(string[] args) =>

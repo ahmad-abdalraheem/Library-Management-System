@@ -6,7 +6,8 @@ namespace Infrastructure.FileModule;
 
 public class MemberRepository : IMemberRepository
 {
-	const string FilePath = "/home/ahmadabdalraheem/RiderProjects/LibraryTask/Library.Infrastructure/Data/Members.json";
+//	const string FilePath = "/home/ahmadabdalraheem/RiderProjects/LibraryTask/Library.Infrastructure/Data/Members.json";
+	const string FilePath = "C:\\Users\\NTC\\Source\\Repos\\Library-Management-System\\Library.Infrastructure\\Data\\Members.json";
 
 	public bool WriteMembers(string jsonString)
 	{

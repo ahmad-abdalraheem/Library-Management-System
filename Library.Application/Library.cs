@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using Domain.Entities;
 using Domain.Repository;
@@ -18,22 +19,17 @@ public class Library
 	{
 		if (Members == null && GetAllMembers() == null)
 			return false;
-		if (Members.Any(m => m.MemberId == member.MemberId))
-		{
-			// logger
-			return false;
-		}
+		member.MemberId = Members.Count == 0? 1: Members.Max(x => x.MemberId) + 1;
 		Members?.Add(member);
 		
 		string updatedJsonString = JsonSerializer.Serialize(Members, new JsonSerializerOptions { WriteIndented = true });
 
 		return _memberRepository.WriteMembers(updatedJsonString);
 	}
-	public bool UpdateMember(Member member)
+	public bool UpdateMember(Member member, int memberIndex)
 	{
 		if (Members == null && GetAllMembers() == null)
 			return false;
-		int memberIndex = Members.FindIndex(m => m.MemberId == member.MemberId);
 		Members[memberIndex] = member;
 		string updatedJsonString = JsonSerializer.Serialize(Members, new JsonSerializerOptions { WriteIndented = true });
 
@@ -53,5 +49,9 @@ public class Library
 	{
 		Members = _memberRepository.ReadMembers();
 		return Members;	
+	}
+	public void SaveMembers()
+	{
+		
 	}
 }
