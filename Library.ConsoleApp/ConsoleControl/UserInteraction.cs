@@ -9,7 +9,7 @@ public class UserInteraction
         Console.Write(Ansi.CursorPosition(1, 1));
         foreach (string option in options)
         {
-            Console.WriteLine($">> ${option}");
+            Console.WriteLine($">> {option}");
         }
         Console.WriteLine(Ansi.Yellow + instruction + Ansi.Reset);
         Console.Write(Ansi.CursorPosition(1, 1) + Ansi.ClearLine + Ansi.Blue + ">> " + options[0] + Ansi.Reset + Ansi.ToLineStart);

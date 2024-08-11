@@ -1,19 +1,21 @@
 [
   {
     "BookID": 1,
-    "Title": "C++ in Arabic",
+    "Title": "C\u002B\u002B in Arabic",
     "Author": "John Doe",
-    "IsBorrowed": false,
-    "BorrowedDate": null,
-    "BorrowedBy": null
+    "IsBorrowed": true,
+    "BorrowedDate": "0001-01-01T00:00:00",
+    "BorrowedBy": 1,
+    "MemberName": null
   },
   {
     "BookID": 2,
     "Title": "Introduction to Algorithms",
     "Author": "Thomas H. Cormen",
-    "IsBorrowed": true,
-    "BorrowedDate": "2024-07-10T00:00:00",
-    "BorrowedBy": 3
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null,
+    "MemberName": "Ahmad Jallad"
   },
   {
     "BookID": 3,
@@ -21,7 +23,8 @@
     "Author": "Robert C. Martin",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 4,
@@ -29,7 +32,8 @@
     "Author": "Andrew Hunt",
     "IsBorrowed": true,
     "BorrowedDate": "2024-06-25T00:00:00",
-    "BorrowedBy": 2
+    "BorrowedBy": 2,
+    "MemberName": "Qaid Qadoumi"
   },
   {
     "BookID": 5,
@@ -37,7 +41,8 @@
     "Author": "Joshua Bloch",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 6,
@@ -45,7 +50,8 @@
     "Author": "Erich Gamma",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 7,
@@ -53,7 +59,8 @@
     "Author": "Martin Fowler",
     "IsBorrowed": true,
     "BorrowedDate": "2024-08-01T00:00:00",
-    "BorrowedBy": 1
+    "BorrowedBy": 1,
+    "MemberName": "Ahmad Nairat"
   },
   {
     "BookID": 8,
@@ -61,7 +68,8 @@
     "Author": "Frederick P. Brooks Jr.",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 9,
@@ -69,15 +77,17 @@
     "Author": "Steve McConnell",
     "IsBorrowed": true,
     "BorrowedDate": "2024-07-20T00:00:00",
-    "BorrowedBy": 5
+    "BorrowedBy": 5,
+    "MemberName": "Laila Mahmoud"
   },
   {
     "BookID": 10,
-    "Title": "You Don't Know JS",
+    "Title": "You Don\u0027t Know JS",
     "Author": "Kyle Simpson",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 11,
@@ -85,7 +95,8 @@
     "Author": "Donald E. Knuth",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 12,
@@ -93,7 +104,8 @@
     "Author": "Douglas Crockford",
     "IsBorrowed": true,
     "BorrowedDate": "2024-08-05T00:00:00",
-    "BorrowedBy": 4
+    "BorrowedBy": 4,
+    "MemberName": "Sultan Dweik"
   },
   {
     "BookID": 13,
@@ -101,7 +113,8 @@
     "Author": "Marijn Haverbeke",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 14,
@@ -109,7 +122,8 @@
     "Author": "Shai Shalev-Shwartz",
     "IsBorrowed": false,
     "BorrowedDate": null,
-    "BorrowedBy": null
+    "BorrowedBy": null,
+    "MemberName": null
   },
   {
     "BookID": 15,
@@ -117,6 +131,7 @@
     "Author": "Stuart Russell",
     "IsBorrowed": true,
     "BorrowedDate": "2024-08-07T00:00:00",
-    "BorrowedBy": 6
+    "BorrowedBy": 6,
+    "MemberName": "Hadi Manasrah"
   }
 ]

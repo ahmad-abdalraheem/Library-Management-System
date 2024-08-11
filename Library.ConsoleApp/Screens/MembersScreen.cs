@@ -9,10 +9,10 @@ public class Members
         List<Member>? members = library.GetAllMembers();
         if(members == null)
         {
-            Console.WriteLine("Sorry, Data is not available right now.");
+            Console.WriteLine("Sorry, Data is not available right now. press any key to get back.");
+            Console.ReadKey();
             return 0;
         }
-        Console.Write(Ansi.SavePosition);
 
         bool isExit = false;
         while (!isExit)
@@ -20,8 +20,16 @@ public class Members
             Console.Clear();
             if (members.Count == 0)
             {
-                Console.WriteLine("No members found. Please add a new member.");
-                library.AddMember(AddMember());
+                Console.WriteLine(Ansi.Red+"No members found." + Ansi.Reset);
+                switch (UserInteraction.GetUserSelection(["Add a new Member", "Back to main menu."]))
+                {
+                    case 0:
+                        library.AddMember(AddMember());
+                        break;
+                    default:
+                        isExit = true;
+                        break;
+                }
             }
             else
             {
@@ -35,10 +43,7 @@ public class Members
     public static void Displaymembers(ref List<Member> members)
     {
         if (members.Count == 0)
-        {
-            Console.WriteLine(Ansi.Red + "No Records." + Ansi.Reset);
             return;
-        }
         int currentRow = 1, nameWidth = members.Max(m => m.Name.Length) + 7;
         Console.Write(Ansi.CursorPosition(1, 1) + Ansi.Clear + Ansi.Yellow);
         Console.Write($"ID{Ansi.CursorPosition(1,5)}Name{Ansi.CursorPosition(1, nameWidth)}Email");
@@ -53,12 +58,12 @@ public class Members
         Console.WriteLine("- Delete Key -> Delete selected record.");
         Console.WriteLine("- Enter Key -> Update selected record.");
         Console.WriteLine("- Plus (+) Key -> Add a new record.");
-        Console.WriteLine("- ESC (Escape) Key -> Get back to Main Menu." + Ansi.Reset);
+        Console.WriteLine("- Backspace Key -> Get back to Main Menu." + Ansi.Reset);
     }
     public static bool MemberOperation (ref List<Member> members, ref Application.Library library)
     {
         int  nameWidth = members.Max(m => m.Name.Length) + 7, selected = 0;
-        Console.Write(Ansi.RestorePosition + Ansi.CursorPosition(selected + 3, 1) + Ansi.ClearLine + Ansi.Blue);
+        Console.Write(Ansi.CursorPosition(selected + 3, 1) + Ansi.ClearLine + Ansi.Blue);
         Console.Write(members[selected].MemberId + Ansi.CursorPosition(selected + 3, 5)
                     + members[selected].Name + Ansi.CursorPosition(selected + 3, nameWidth)
                     + members[selected].Email + Ansi.Reset + Ansi.ToLineStart);
@@ -101,6 +106,11 @@ public class Members
                     break;
                 case ConsoleKey.Enter:
                     members[selected] = UpdateMember(members[selected]);
+                    if(library.UpdateMember(members[selected], selected))
+                        return false;
+                    Console.Clear();
+                    Console.Write(Ansi.Red + "Record Cannot be updated right now. press and key to continue" + Ansi.Reset);
+                    Console.ReadKey();
                     return false;
                 case ConsoleKey.Delete:
                     library.DeleteMember(members[selected]);
@@ -109,7 +119,7 @@ public class Members
                 case ConsoleKey.Add:
                     library.AddMember(AddMember());
                     return false;
-                case ConsoleKey.Escape:
+                case ConsoleKey.Backspace:
                     return true;
             }
         }
@@ -142,10 +152,10 @@ public class Members
 
         Console.Clear();
         Console.WriteLine(Ansi.Yellow + "Member ID : " + Ansi.Reset + member.MemberId);
-        Console.Write(Ansi.Yellow + "Mamber Name : " +Ansi.SavePosition + Ansi.Reset);
+        Console.Write(Ansi.Yellow + "Mamber Name : " + Ansi.Reset);
         string input = Console.ReadLine();
-        Console.Write(Ansi.RestorePosition + input + "\n");
         member.Name = input == String.Empty ? member.Name : input;
+        Console.Write(Ansi.LineUp + Ansi.MoveRight(14) + member.Name + "\n");
         Console.Write(Ansi.Yellow + "Member Email : " + Ansi.Reset);
         input = Console.ReadLine();
         member.Email = input == String.Empty ? member.Email : input;

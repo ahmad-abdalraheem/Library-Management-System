@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Domain.Entities;
 public class Book
 {
@@ -10,4 +12,6 @@ public class Book
 	///  Borrowed Member ID
 	/// </summary>
 	public int? BorrowedBy { get; set; }
+	
+	[NotMapped] public string MemberName { get; set; }
 }

@@ -15,10 +15,11 @@ public class MainScreen
                     Members.MembersMenu(library);
                     break;
                 case 1:
-
+                    Console.Clear();
+                    Books.BooksMenu(library);
                     break;
                 case 2:
-
+                    BorrowScreen.BorrowBookMenu(library);
                     break;
                 default:
                     return 0;
