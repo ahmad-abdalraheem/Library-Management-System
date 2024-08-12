@@ -1,25 +1,29 @@
 using Domain.Entities;
+using Library.Application.Service;
 using Member = AutoMapper.Execution.Member;
 
 namespace ConsoleApp;
-public class BorrowScreen
+public class BorrowScreen(LibraryService libraryService)
 {
-    public static int BorrowBookMenu (Application.Library library)
+    private LibraryService _libraryService = libraryService;
+    
+    public List<Book>? BorrowedBooks { get; set; }
+    private List<Book>? AvailableBooks { get; set; }
+    private List<Member>? Members { get; set; }
+    public int BorrowBookMenu ()
     {
-        Console.Write(Ansi.HideCursor);
-        List<Book> books = library.GetBorrowedBooks();
-
+        BorrowedBooks = _libraryService.GetBorrowed();
         bool isExit = false;
         while (!isExit)
         {
-            if (books.Count == 0)
+            if (BorrowedBooks?.Count == 0)
             {
                 Console.Clear();
                 Console.Write(Ansi.Red + "No Borrowed books. press on ADD button to borrow one or Backspace to get back." +Ansi.Reset);
                 switch (UserInteraction.GetUserSelection(["Borrow new book.", "Get Back."]))
                 {
                     case 0:
-                        BorrowBook(library, ref books);
+                        
                         break;
                     default:
                         isExit = true;
@@ -34,7 +38,7 @@ public class BorrowScreen
         }
         return 0;
     }
-    public static bool BorrowOpearion(Application.Library library,ref List<Book> books)
+    public bool BorrowOpearion()
     {
         int selection = 0;
         PrintRow(books[selection], selection+3, 24, Ansi.Blue);
@@ -73,73 +77,45 @@ public class BorrowScreen
             }
         }
     }
-    public static void DisplayBorrowedBooks(Application.Library library, List<Book> books, int maxAuthor)
+    public void DisplayBorrowedBooks()
     {
         Console.Clear();
-        if (books.Count == 0)
+        if (BorrowedBooks?.Count == 0)
             return;
         int currentRow = 1;
         Console.Write($"ID{Ansi.CursorPosition(1, 5)}Title{Ansi.CursorPosition(1, 40)}Author" +
-                      $"{Ansi.CursorPosition(1, maxAuthor + 44)}Borrowed By" +
-                      $"{Ansi.CursorPosition(1, maxAuthor + 64)}Borrowed Date");
+                      $"{Ansi.CursorPosition(1, 68)}Borrowed By" +
+                      $"{Ansi.CursorPosition(1, 93)}Borrowed Date");
         Console.Write("\n______________________________________________________________\n" + Ansi.Reset);
         currentRow += 2;
-        foreach (Book book in books)
+        foreach (Book book in BorrowedBooks)
         {
-            PrintRow(book, currentRow++, maxAuthor, Ansi.Reset);
-            Console.WriteLine();
+            PrintRow(book, currentRow++, Ansi.Reset);
         }
         Console.WriteLine(Ansi.Yellow + "\nUse Arrow (Up/Down) To select Record, then press:");
         Console.WriteLine("- Enter Key -> Return the book");
         Console.WriteLine("- Plus (+) Key -> Borrow a new book");
         Console.WriteLine("- Backspace Key -> Get back to Main Menu." + Ansi.Reset);
     }
-    public static bool BorrowBook(Application.Library library, ref List<Book> books)
+    public Book? SelectAvailableBook()
     {
-        Console.Clear();
-        List<Book> availableBooks = library.GetAvailableBooks();
-        List<Domain.Entities.Member> members = library.GetAllMembers();
-        if (availableBooks.Count == 0 || members.Count == 0)
-        {
-            Console.WriteLine(Ansi.Yellow + "No Available books/members.");
-            Console.ReadKey();
-            return false;
-        }
-        Book newBorrowedBook = SelectAvailableBook(availableBooks);
-        var id = SelectMember(members).MemberId;
-        if (newBorrowedBook != null && id != null)
-        {
-                newBorrowedBook.IsBorrowed = true;
-                newBorrowedBook.BorrowedBy = id;
-                newBorrowedBook.BorrowedDate = new DateTime();
-                books.Remove(newBorrowedBook);
-                books.Add(newBorrowedBook);
-                library.UpdateBook(newBorrowedBook);
-                return true;
-        }
-        return false;
-    }
-    public static Book? SelectAvailableBook(List<Book> books)
-    {
-        Console.Clear();
         Console.Write(Ansi.Yellow + "ID   Title                              Author\n"+
                       "__________________________________________________________\n" + Ansi.Reset);
         int selection = 0;
-        foreach (Book book in books)
+        foreach (Book book in AvailableBooks)
         {
-            Console.Write(Ansi.CursorPosition(selection + 3, 1) + book.BookID + Ansi.CursorPosition(selection+3, 5)+
-                          (book.Title.Length > 30 ? book.Title.Substring(0, 30):book.Title) +
-                           Ansi.CursorPosition(selection + 3, 40) + book.Author);
+            Console.Write(Ansi.CursorPosition(selection + 3, 1) + book.Id + Ansi.CursorPosition(selection+3, 5)+
+                          (book?.Title?.Length > 30 ? book.Title.Substring(0, 30):book?.Title) +
+                           Ansi.CursorPosition(selection + 3, 40) + book?.Author);
             selection++;
         }
-
         selection = 0;
         Console.WriteLine("\nSelect a book to borrow, Backspace to get back");
-        Console.Write(Ansi.Blue + Ansi.CursorPosition(3,1) + books[selection].BookID + Ansi.CursorPosition(3,5) +
-                      (books[selection].Title.Length > 30
-                          ? books[selection].Title.Substring(0, 30) + "..."
-                          : books[selection].Title)
-                      + Ansi.CursorPosition(3,40) + books[selection].Author + Ansi.Reset);
+        Console.Write(Ansi.Blue + Ansi.CursorPosition(3,1) + AvailableBooks[selection].Id + Ansi.CursorPosition(3,5) +
+                      (AvailableBooks[selection]?.Title?.Length > 30
+                          ? AvailableBooks[selection]?.Title?.Substring(0, 30) + "..."
+                          : AvailableBooks[selection]?.Title)
+                      + Ansi.CursorPosition(3,40) + AvailableBooks[selection]?.Author + Ansi.Reset);
         while (true)
         {
             switch (Console.ReadKey().Key)
@@ -147,52 +123,50 @@ public class BorrowScreen
                 case ConsoleKey.UpArrow:
                     if (selection > 0)
                     {
-                        Console.Write(Ansi.ToLineStart + books[selection].BookID + Ansi.CursorPosition(selection + 3,5) +
-                                      (books[selection].Title.Length > 30
-                                          ? books[selection].Title.Substring(0, 30) + "..."
-                                          : books[selection].Title)
-                                      + Ansi.CursorPosition(selection + 3,40) + books[selection].Author);
+                        Console.Write(Ansi.ToLineStart + AvailableBooks[selection].Id + Ansi.CursorPosition(selection + 3,5) +
+                                      (AvailableBooks[selection]?.Title?.Length > 30
+                                          ? AvailableBooks[selection]?.Title?.Substring(0, 30) + "..."
+                                          : AvailableBooks[selection].Title)
+                                      + Ansi.CursorPosition(selection + 3,40) + AvailableBooks[selection].Author);
                         selection--;
-                        Console.Write(Ansi.LineUp + Ansi.ToLineStart + Ansi.Blue + books[selection].BookID +
-                                      Ansi.CursorPosition(selection + 3,5) +
-                                      (books[selection].Title.Length > 30
-                                          ? books[selection].Title.Substring(0, 30) + "..."
-                                          : books[selection].Title)
-                                      + Ansi.CursorPosition(selection + 3,40) + books[selection].Author + Ansi.Reset);
+                        Console.Write(Ansi.ToLineStart + Ansi.Blue + AvailableBooks[selection].Id + Ansi.CursorPosition(selection + 3,5) +
+                                      (AvailableBooks[selection]?.Title?.Length > 30
+                                          ? AvailableBooks[selection]?.Title?.Substring(0, 30) + "..."
+                                          : AvailableBooks[selection].Title)
+                                      + Ansi.CursorPosition(selection + 3,40) + AvailableBooks[selection].Author);
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    if (selection < books.Count - 1)
+                    if (selection < AvailableBooks.Count - 1)
                     {
-                        Console.Write(Ansi.ToLineStart + books[selection].BookID + Ansi.CursorPosition(selection + 3,5) +
-                                      (books[selection].Title.Length > 30
-                                          ? books[selection].Title.Substring(0, 30) + "..."
-                                          : books[selection].Title)
-                                      + Ansi.CursorPosition(selection + 3,40) + books[selection].Author);
+                        Console.Write(Ansi.ToLineStart + AvailableBooks[selection].Id + Ansi.CursorPosition(selection + 3,5) +
+                                      (AvailableBooks[selection]?.Title?.Length > 30
+                                          ? AvailableBooks[selection]?.Title?.Substring(0, 30) + "..."
+                                          : AvailableBooks[selection].Title)
+                                      + Ansi.CursorPosition(selection + 3,40) + AvailableBooks[selection].Author);
                         selection++;
-                        Console.Write(Ansi.LineDown + Ansi.ToLineStart + Ansi.Blue + books[selection].BookID +
-                                      Ansi.CursorPosition(selection + 3,5) +
-                                      (books[selection].Title.Length > 30
-                                          ? books[selection].Title.Substring(0, 30) + "..."
-                                          : books[selection].Title)
-                                      + Ansi.CursorPosition(selection + 3,40) + books[selection].Author + Ansi.Reset);
+                        Console.Write(Ansi.ToLineStart + Ansi.Blue + AvailableBooks[selection].Id + Ansi.CursorPosition(selection + 3,5) +
+                                      (AvailableBooks[selection]?.Title?.Length > 30
+                                          ? AvailableBooks[selection]?.Title?.Substring(0, 30) + "..."
+                                          : AvailableBooks[selection].Title)
+                                      + Ansi.CursorPosition(selection + 3,40) + AvailableBooks[selection].Author);
                     }
                     break;
                 case ConsoleKey.Enter:
-                    return books[selection];
+                    return AvailableBooks[selection];
                 case ConsoleKey.Backspace:
                     return null;
             }
         }
     }
-    public static Domain.Entities.Member? SelectMember(List<Domain.Entities.Member> members)
+    public Member? SelectMember()
     {
         Console.Clear();
         Console.Write(Ansi.Yellow + "ID     Name\n" + "______________________________\n" + Ansi.Reset);
         int selection = 0;
         foreach (var member in members)
         {
-               Console.WriteLine(member.MemberId + Ansi.CursorPosition(selection+3, 5) + member.Name);
+               Console.WriteLine(member.Id + Ansi.CursorPosition(selection+3, 5) + member.);
                selection++;
         }
         Console.Write("Select the member or press Backspace to get back.\n\n");
@@ -230,15 +204,14 @@ public class BorrowScreen
             }
         }
     }
-    public static void PrintRow(Book book, int currentRow, int maxAuthor, string color)
+    private void PrintRow(Book book, int row, string color)
     {
         Console.Write(color);
-        Console.Write(Ansi.CursorPosition(currentRow,1) + book.BookID + Ansi.CursorPosition(currentRow, 5) + 
-                      (book.Title.Length > 30 ? book.Title.Substring(0, 30) + "..." : book.Title) +
-                      Ansi.CursorPosition(currentRow, 40) + book.Author + 
-                      Ansi.CursorPosition(currentRow, maxAuthor + 44) + book.MemberName
-                      + Ansi.CursorPosition(currentRow, maxAuthor + 64) + // 64 + 24
-                      (book.BorrowedDate != null ? book.BorrowedDate.Value.ToShortDateString() : "***") );
-        Console.Write(Ansi.Reset);
+        Console.WriteLine(Ansi.CursorPosition(row, 1) + book.Id + Ansi.CursorPosition(row, 5) + 
+                      (book.Title?.Length > 30 ? book.Title.Substring(0, 30) + "..." : book.Title) +
+                      Ansi.CursorPosition(row, 40) + 
+                      (book.Author?.Length > 25 ? book.Author.Substring(0, 22)+"..." : book.Author) + 
+                      Ansi.CursorPosition(row, 68) + book.MemberName + Ansi.CursorPosition(row, 93) +
+                      book.BorrowedDate.Value.ToShortDateString() + Ansi.Reset);
     }
 }

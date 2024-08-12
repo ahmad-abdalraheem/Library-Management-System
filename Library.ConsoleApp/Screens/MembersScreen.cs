@@ -1,165 +1,133 @@
 using Domain.Entities;
-using System.Collections.Generic;
+using Library.Application.Service;
 
-namespace ConsoleApp;
-public class Members
+namespace ConsoleApp
 {
-    public static int MembersMenu (Application.Library library)
+    public class MembersScreen(MemberService memberService)
     {
-        List<Member>? members = library.GetAllMembers();
-        if(members == null)
+        private List<Member>? _members = memberService.Get();
+        public int MembersMenu()
         {
-            Console.WriteLine("Sorry, Data is not available right now. press any key to get back.");
-            Console.ReadKey();
-            return 0;
-        }
-
-        bool isExit = false;
-        while (!isExit)
-        {
-            Console.Clear();
-            if (members.Count == 0)
+            bool isExit = false;
+            while (!isExit)
             {
-                Console.WriteLine(Ansi.Red+"No members found." + Ansi.Reset);
-                switch (UserInteraction.GetUserSelection(["Add a new Member", "Back to main menu."]))
+                if (_members == null)
+                    return 0;
+                Console.Clear();
+                if (_members?.Count == 0)
                 {
-                    case 0:
-                        library.AddMember(AddMember());
-                        break;
-                    default:
-                        isExit = true;
-                        break;
+                    Console.WriteLine(Ansi.Red + "No members found." + Ansi.Reset);
+                    switch (UserInteraction.GetUserSelection([ "Add a new Member", "Back to main menu." ]))
+                    {
+                        case 0:
+                            memberService?.Add(AddMember());
+                            _members = memberService?.Get();
+                            break;
+                        default:
+                            isExit = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    DisplayMembers();
+                    isExit = MemberOperation();
                 }
             }
-            else
-            {
-                Console.Write(Ansi.SavePosition);
-                Displaymembers(ref members);
-                isExit = MemberOperation(ref members, ref library);
-            }
+            return 0;
         }
-        return 0;
-    }
-    public static void Displaymembers(ref List<Member> members)
-    {
-        if (members.Count == 0)
-            return;
-        int currentRow = 1, nameWidth = members.Max(m => m.Name.Length) + 7;
-        Console.Write(Ansi.CursorPosition(1, 1) + Ansi.Clear + Ansi.Yellow);
-        Console.Write($"ID{Ansi.CursorPosition(1,5)}Name{Ansi.CursorPosition(1, nameWidth)}Email");
-        Console.Write("\n__________________________________________________\n" + Ansi.Reset);
-        currentRow += 2;
-        foreach (Member member in members)
+        private void DisplayMembers()
         {
-            Console.WriteLine($"{member.MemberId}{Ansi.CursorPosition(currentRow, 5)}{member.Name}{Ansi.CursorPosition(currentRow, nameWidth)}{member.Email}");
-            currentRow++;
-        }
-        Console.WriteLine(Ansi.Yellow + "\nUse Arrow (Up/Down) To select Record, then press:");
-        Console.WriteLine("- Delete Key -> Delete selected record.");
-        Console.WriteLine("- Enter Key -> Update selected record.");
-        Console.WriteLine("- Plus (+) Key -> Add a new record.");
-        Console.WriteLine("- Backspace Key -> Get back to Main Menu." + Ansi.Reset);
-    }
-    public static bool MemberOperation (ref List<Member> members, ref Application.Library library)
-    {
-        int  nameWidth = members.Max(m => m.Name.Length) + 7, selected = 0;
-        Console.Write(Ansi.CursorPosition(selected + 3, 1) + Ansi.ClearLine + Ansi.Blue);
-        Console.Write(members[selected].MemberId + Ansi.CursorPosition(selected + 3, 5)
-                    + members[selected].Name + Ansi.CursorPosition(selected + 3, nameWidth)
-                    + members[selected].Email + Ansi.Reset + Ansi.ToLineStart);
-        bool loopControl = true;
-        while (loopControl)
-        {
-            ConsoleKey key = Console.ReadKey(true).Key;
-            switch(key)
-            {
-                case ConsoleKey.UpArrow:
-                    if(selected > 0)
-                    {
-                        Console.Write(Ansi.ClearLine + members[selected].MemberId 
-                                    + Ansi.CursorPosition(selected + 3, 5) + members[selected].Name 
-                                    + Ansi.CursorPosition(selected + 3, nameWidth) + members[selected].Email 
-                                    + Ansi.Reset + Ansi.ToLineStart);
-                        Console.Write(Ansi.LineUp + Ansi.ClearLine + Ansi.Blue);
-                        selected--;
-                        Console.Write(Ansi.ClearLine + members[selected].MemberId
-                                    + Ansi.CursorPosition(selected + 3, 5) + members[selected].Name
-                                    + Ansi.CursorPosition(selected + 3, nameWidth) + members[selected].Email
-                                    + Ansi.Reset + Ansi.ToLineStart);
-                    }
-                    break;
-                case ConsoleKey.DownArrow:
-                    if(selected < members.Count - 1)
-                    {
-                        Console.Write(Ansi.ClearLine + members[selected].MemberId
-                                    + Ansi.CursorPosition(selected + 3, 5) + members[selected].Name
-                                    + Ansi.CursorPosition(selected + 3, nameWidth) + members[selected].Email
-                                    + Ansi.Reset + Ansi.ToLineStart);
-                        Console.Write(Ansi.LineDown + Ansi.ClearLine + Ansi.Blue);
-                        selected++;
-                        Console.Write(Ansi.ClearLine + members[selected].MemberId
-                                    + Ansi.CursorPosition(selected + 3, 5) + members[selected].Name
-                                    + Ansi.CursorPosition(selected + 3, nameWidth) + members[selected].Email
-                                    + Ansi.Reset + Ansi.ToLineStart);
-                    }
+            int currentRow = 1;
+            Console.Write(Ansi.CursorPosition(1, 1) + Ansi.Clear + Ansi.Yellow);
+            Console.Write($"ID{Ansi.CursorPosition(1, 5)}Name{Ansi.CursorPosition(1, 30)}Email");
+            Console.Write("\n__________________________________________________\n" + Ansi.Reset);
+            currentRow += 2;
+            foreach (Member member in _members)
+                PrintRowL(member, currentRow++);
 
-                    break;
-                case ConsoleKey.Enter:
-                    members[selected] = UpdateMember(members[selected]);
-                    if(library.UpdateMember(members[selected], selected))
+            Console.WriteLine(Ansi.Yellow + "\nUse Arrow (Up/Down) To select Record, then press:");
+            Console.WriteLine("- Delete Key -> Delete selected record.");
+            Console.WriteLine("- Enter Key -> Update selected record.");
+            Console.WriteLine("- Plus (+) Key -> Add a new record.");
+            Console.WriteLine("- Backspace Key -> Get back to Main Menu." + Ansi.Reset);
+        }
+
+        private bool MemberOperation()
+        {
+            int selected = 0;
+            PrintRowL(_members[selected], 3, Ansi.Blue);
+            while (true)
+            {
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (selected > 0)
+                        {
+                            PrintRow(_members[selected], selected + 3);
+                            selected--;
+                            PrintRow(_members[selected], selected + 3, Ansi.Blue);
+                        }
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected < _members.Count - 1)
+                        {
+                            PrintRowL(_members[selected], selected + 3);
+                            selected++;
+                            PrintRowL(_members[selected], selected + 3, Ansi.Blue);
+                        }
+                        break;
+                    case ConsoleKey.Enter:
+                        _members[selected] = UpdateMember(_members[selected]);
+                        memberService.Update(_members[selected]);
+                        _members = memberService.Get();
                         return false;
-                    Console.Clear();
-                    Console.Write(Ansi.Red + "Record Cannot be updated right now. press and key to continue" + Ansi.Reset);
-                    Console.ReadKey();
-                    return false;
-                case ConsoleKey.Delete:
-                    library.DeleteMember(members[selected]);
-                    members = library.GetAllMembers();
-                    return false;
-                case ConsoleKey.Add:
-                    library.AddMember(AddMember());
-                    return false;
-                case ConsoleKey.Backspace:
-                    return true;
+                    case ConsoleKey.Delete:
+                        memberService.Delete(_members[selected].Id);
+                        _members = memberService.Get();
+                        return false;
+                    case ConsoleKey.Add:
+                        memberService.Add(AddMember());
+                        _members = memberService.Get();
+                        return false;
+                    case ConsoleKey.Backspace:
+                        return true;
+                }
             }
         }
-        return true;
-    }
-    public static Member AddMember()
-    {
-        Console.Clear();
-        Member member = new Member();
-        Console.Write(Ansi.Yellow + "Member Name : " + Ansi.Reset + Ansi.ShowCursor);
-        string input;
-        do
+        private Member AddMember()
         {
-            input = Console.ReadLine().Trim();
-            if (input != String.Empty)
-                break;
-            Console.Write($"Name cannot be empty. Enter name please or press {Ansi.Green}Esape{Ansi.Reset} to exit");
-            Console.Write(Ansi.ToLineStart + Ansi.LineUp + Ansi.MoveRight(15));
-
-        } while(true);
-        member.Name = input;
-        Console.Write(Ansi.ClearLine + Ansi.Yellow + "Email : " + Ansi.Reset);
-        input = Console.ReadLine().Trim();
-        member.Email = (input == String.Empty) ? "Undefined" : input;
-        Console.Write(Ansi.HideCursor);
-        return member;
+            Console.Clear();
+            Member member = new Member();
+            Console.Write(Ansi.Yellow + "Member Name : " + Ansi.Reset + Ansi.ShowCursor);
+            member.Name = Console.ReadLine()?.Trim();
+            Console.Write(Ansi.ClearLine + Ansi.Yellow + "Email : " + Ansi.Reset);
+            member.Email = Console.ReadLine()?.Trim();
+            Console.Write(Ansi.HideCursor);
+            return member;
+        }
+        private Member UpdateMember(Member member)
+        {
+            Console.Clear();
+            Console.WriteLine(Ansi.Yellow + "Member ID : " + Ansi.Reset + member.Id);
+            Console.Write(Ansi.Yellow + "Member Name : " + Ansi.Reset);
+            string? input = Console.ReadLine()?.Trim();
+            member.Name = input == String.Empty ? member.Name : input;
+            Console.Write(Ansi.LineUp + Ansi.MoveRight(14) + member.Name + "\n");
+            Console.Write(Ansi.Yellow + "Member Email : " + Ansi.Reset);
+            input = Console.ReadLine()?.Trim();
+            member.Email = input == String.Empty ? member.Email : input;
+            return member;
+        }
+        private void PrintRow(Member member, int row, string color = "\x1b[0m")
+        {
+            Console.Write(color + Ansi.CursorPosition(row, 1) + member.Id + Ansi.CursorPosition(row, 5) + member.Name +
+                          Ansi.CursorPosition(row, 30) + member.Email + Ansi.Reset);
+        }
+        private void PrintRowL(Member member, int row, string color = "\x1b[0m")
+        {
+            Console.WriteLine(color + Ansi.CursorPosition(row, 1) + member.Id + Ansi.CursorPosition(row, 5) + member.Name +
+                              Ansi.CursorPosition(row, 30) + member.Email + Ansi.Reset);
+        }
     }
-    public static Member UpdateMember(Member member)
-    {
-
-        Console.Clear();
-        Console.WriteLine(Ansi.Yellow + "Member ID : " + Ansi.Reset + member.MemberId);
-        Console.Write(Ansi.Yellow + "Mamber Name : " + Ansi.Reset);
-        string input = Console.ReadLine();
-        member.Name = input == String.Empty ? member.Name : input;
-        Console.Write(Ansi.LineUp + Ansi.MoveRight(14) + member.Name + "\n");
-        Console.Write(Ansi.Yellow + "Member Email : " + Ansi.Reset);
-        input = Console.ReadLine();
-        member.Email = input == String.Empty ? member.Email : input;
-        return member;
-    }
-        
 }

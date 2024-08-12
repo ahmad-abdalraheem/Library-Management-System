@@ -1,24 +1,6 @@
 [
   {
-    "BookID": 1,
-    "Title": "C\u002B\u002B in Arabic",
-    "Author": "John Doe",
-    "IsBorrowed": true,
-    "BorrowedDate": "0001-01-01T00:00:00",
-    "BorrowedBy": 1,
-    "MemberName": null
-  },
-  {
-    "BookID": 2,
-    "Title": "Introduction to Algorithms",
-    "Author": "Thomas H. Cormen",
-    "IsBorrowed": false,
-    "BorrowedDate": null,
-    "BorrowedBy": null,
-    "MemberName": "Ahmad Jallad"
-  },
-  {
-    "BookID": 3,
+    "Id": 1,
     "Title": "Clean Code",
     "Author": "Robert C. Martin",
     "IsBorrowed": false,
@@ -27,44 +9,35 @@
     "MemberName": null
   },
   {
-    "BookID": 4,
-    "Title": "The Pragmatic Programmer",
-    "Author": "Andrew Hunt",
+    "Id": 2,
+    "Title": "Pragmatic Programmer",
+    "Author": "Andrew Hunt and David Thomas",
     "IsBorrowed": true,
-    "BorrowedDate": "2024-06-25T00:00:00",
-    "BorrowedBy": 2,
-    "MemberName": "Qaid Qadoumi"
-  },
-  {
-    "BookID": 5,
-    "Title": "Effective Java",
-    "Author": "Joshua Bloch",
-    "IsBorrowed": false,
-    "BorrowedDate": null,
-    "BorrowedBy": null,
+    "BorrowedDate": "2024-08-10T00:00:00",
+    "BorrowedBy": 3,
     "MemberName": null
   },
   {
-    "BookID": 6,
+    "Id": 3,
     "Title": "Design Patterns",
-    "Author": "Erich Gamma",
+    "Author": "Erich Gamma et al.",
     "IsBorrowed": false,
     "BorrowedDate": null,
     "BorrowedBy": null,
     "MemberName": null
   },
   {
-    "BookID": 7,
+    "Id": 4,
     "Title": "Refactoring",
     "Author": "Martin Fowler",
     "IsBorrowed": true,
-    "BorrowedDate": "2024-08-01T00:00:00",
+    "BorrowedDate": "2024-08-05T00:00:00",
     "BorrowedBy": 1,
-    "MemberName": "Ahmad Nairat"
+    "MemberName": null
   },
   {
-    "BookID": 8,
-    "Title": "The Mythical Man-Month",
+    "Id": 5,
+    "Title": "Mythical Man-Month",
     "Author": "Frederick P. Brooks Jr.",
     "IsBorrowed": false,
     "BorrowedDate": null,
@@ -72,26 +45,71 @@
     "MemberName": null
   },
   {
-    "BookID": 9,
-    "Title": "Code Complete",
-    "Author": "Steve McConnell",
-    "IsBorrowed": true,
-    "BorrowedDate": "2024-07-20T00:00:00",
-    "BorrowedBy": 5,
-    "MemberName": "Laila Mahmoud"
-  },
-  {
-    "BookID": 10,
+    "Id": 7,
     "Title": "You Don\u0027t Know JS",
     "Author": "Kyle Simpson",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-08T00:00:00",
+    "BorrowedBy": 5,
+    "MemberName": null
+  },
+  {
+    "Id": 8,
+    "Title": "Theory of Computation",
+    "Author": "Michael Sipser",
     "IsBorrowed": false,
     "BorrowedDate": null,
     "BorrowedBy": null,
     "MemberName": null
   },
   {
-    "BookID": 11,
-    "Title": "The Art of Computer Programming",
+    "Id": 9,
+    "Title": "Effective Java",
+    "Author": "Joshua Bloch",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-12T00:00:00",
+    "BorrowedBy": 4,
+    "MemberName": null
+  },
+  {
+    "Id": 10,
+    "Title": "Algorithms",
+    "Author": "Thomas H. Cormen",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null,
+    "MemberName": null
+  },
+  {
+    "Id": 11,
+    "Title": "Domain-Driven",
+    "Author": "Eric Evans",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null,
+    "MemberName": null
+  },
+  {
+    "Id": 12,
+    "Title": "Continuous Delivery",
+    "Author": "Jez Humble and David Farley",
+    "IsBorrowed": true,
+    "BorrowedDate": "2024-08-07T00:00:00",
+    "BorrowedBy": 6,
+    "MemberName": null
+  },
+  {
+    "Id": 13,
+    "Title": "Head First Design",
+    "Author": "Eric Freeman",
+    "IsBorrowed": false,
+    "BorrowedDate": null,
+    "BorrowedBy": null,
+    "MemberName": null
+  },
+  {
+    "Id": 14,
+    "Title": "Art of Programming",
     "Author": "Donald E. Knuth",
     "IsBorrowed": false,
     "BorrowedDate": null,
@@ -99,39 +117,12 @@
     "MemberName": null
   },
   {
-    "BookID": 12,
-    "Title": "JavaScript: The Good Parts",
-    "Author": "Douglas Crockford",
+    "Id": 15,
+    "Title": "Software Engenering",
+    "Author": "Titus Winters et al.",
     "IsBorrowed": true,
-    "BorrowedDate": "2024-08-05T00:00:00",
-    "BorrowedBy": 4,
-    "MemberName": "Sultan Dweik"
-  },
-  {
-    "BookID": 13,
-    "Title": "Eloquent JavaScript",
-    "Author": "Marijn Haverbeke",
-    "IsBorrowed": false,
-    "BorrowedDate": null,
-    "BorrowedBy": null,
+    "BorrowedDate": "2024-08-01T00:00:00",
+    "BorrowedBy": 2,
     "MemberName": null
-  },
-  {
-    "BookID": 14,
-    "Title": "Understanding Machine Learning",
-    "Author": "Shai Shalev-Shwartz",
-    "IsBorrowed": false,
-    "BorrowedDate": null,
-    "BorrowedBy": null,
-    "MemberName": null
-  },
-  {
-    "BookID": 15,
-    "Title": "Artificial Intelligence: A Modern Approach",
-    "Author": "Stuart Russell",
-    "IsBorrowed": true,
-    "BorrowedDate": "2024-08-07T00:00:00",
-    "BorrowedBy": 6,
-    "MemberName": "Hadi Manasrah"
   }
 ]

@@ -1,35 +1,49 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
-using Application;
-using ConsoleApp;
-using Domain.Entities;
-using Domain.Repository;
-using Infrastructure.FileModule;
-
+using Library.Application.Service;
 
 namespace ConsoleApp
 {
-	public class Program
+	public abstract class Program
 	{
-		public static int Main(string[] args)
+		public static Task<int> Main(string[] args)
 		{
-			var host = CreateHostBuilder(args).Build();
-			var library = host.Services.GetRequiredService<Application.Library>();
-
-			MainScreen.MainScreenMenu(library);
-			return 0;
-		}
-
-		private static IHostBuilder CreateHostBuilder(string[] args) =>
-			Host.CreateDefaultBuilder(args)
-				.ConfigureServices((context, services) =>
+			var host = Host.CreateDefaultBuilder(args)
+				.ConfigureServices((services) =>
 				{
-					services.AddScoped<IMemberRepository, MemberRepository>();
-					services.AddSingleton<Application.Library>();
-					
-					services.AddScoped<IBookRepository, BookRepository>();
-					services.AddSingleton<Application.Library>();
-				});
+					services.AddApplicationServices();
+				})
+				.Build();
+
+			MemberService memberService = host.Services.GetRequiredService<MemberService>();
+			BookService bookService = host.Services.GetRequiredService<BookService>();
+			LibraryService libraryService = new LibraryService(bookService, memberService);
+			
+			MembersScreen membersScreen = new MembersScreen(memberService);
+			BooksScreen booksScreen = new BooksScreen(bookService);
+			
+			Console.WriteLine(Ansi.HideCursor);
+			List<String> options =["Members", "Books", "Return/Borrow book", "Exit"];
+
+			while (true)
+			{
+				var selection = UserInteraction.GetUserSelection(options);
+				switch (selection)
+				{
+					case 0:
+						membersScreen.MembersMenu();
+						break;
+					case 1:
+						booksScreen.BooksMenu();			
+						break;
+					case 2:
+						break;
+					case 3:
+						return Task.FromResult(0);
+					default:
+						return Task.FromResult(0);
+				}
+			}
+		}
 	}
 }
